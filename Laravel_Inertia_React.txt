@@ -1,0 +1,128 @@
+1. Download beberapa dependencies
+	Laravel
+	$>composer create-project --prefer-dist laravel/laravel:^11.0 webapp3
+
+	React
+	$>cd webapp3
+	$>npm i react react-dom
+
+	Vite asset manager
+	$>npm i --save-dev @vitejs/plugin-react
+
+	inertia
+	$>npm i @inertiajs/react
+	$>composer require inertiajs/inertia-laravel
+	$>./artisan inertia:middleware
+
+	Tailwind CSS
+	$>npm i -D tailwindcss postcss autoprefixer
+	$>npx tailwindcss init -p
+2. Buat resources/views/app.blade.php
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    @viteReactRefresh
+	    @vite('resources/js/app.jsx')
+	    @inertiaHead
+	</head>
+	<body>
+	    @inertia    
+	</body>
+	</html>
+3. Rename resources/js/app.js resources/js/app.jsx
+4. Edit resources/js/app.jsx
+   	
+   	import './bootstrap';
+
+	import { createInertiaApp } from  '@inertiajs/react'
+	import { createRoot } from 'react-dom/client';
+
+	createInertiaApp({
+	    resolve:name => {
+	        const pages = import.meta.glob('./Pages/../*.jsx',{eager:true})
+	        return pages[`./Pages/${name}.jsx`]
+	    },
+	    setup({el,App,props}){
+	        createRoot(el).render(<App {...props} />)
+	    }
+	})
+5. Edit bootstrap/app.php
+	<?php
+
+	use App\Http\Middleware\HandleInertiaRequests;
+	use Illuminate\Foundation\Application;
+	use Illuminate\Foundation\Configuration\Exceptions;
+	use Illuminate\Foundation\Configuration\Middleware;
+
+	return Application::configure(basePath: dirname(__DIR__))
+	    ->withRouting(
+	        web: __DIR__.'/../routes/web.php',
+	        commands: __DIR__.'/../routes/console.php',
+	        health: '/up',
+	    )
+	    ->withMiddleware(function (Middleware $middleware) {
+	        $middleware->web(append:[
+	            HandleInertiaRequests::class
+	        ])
+	        //
+	    })
+	    ->withExceptions(function (Exceptions $exceptions) {
+	        //
+	    })->create();
+
+
+6. Edit vite.config.js
+
+	import { defineConfig } from 'vite';
+	import laravel from 'laravel-vite-plugin';
+	import react from '@vitejs/plugin-react'
+
+	export default defineConfig({
+	    plugins: [
+	        laravel({
+	            input: 'resources/js/app.jsx',
+	            refresh: true,
+	        }),
+	        react()
+	    ],
+	});
+
+7. buat resources/js/Pages/Home.jsx
+	export default function Home(){
+	    return (
+	        <>
+	            Hello Inertia
+	        </>
+	    )
+	}
+
+8. edit routes/web.php
+
+	Route::get('/', function () {
+	    return inertia('Home');
+	});
+
+9. Edit tailwind.config.js
+...
+content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
+        './resources/**/*.jsx',
+        
+    ],
+...
+
+10. edit resources/js/Pages/Home.jsx
+	export default function Home(){
+	    return (
+	        <>
+	            Hello Inertia
+	        </>
+	    )
+	}

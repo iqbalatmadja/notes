@@ -1,0 +1,530 @@
+
+===============================================================================
+MEMULAI PROJECT (dengan versi tertentu)
+=> composer create-project --prefer-dist laravel/laravel:^10.0 crud-laravel-10
+===============================================================================
+MEMBUAT MIGRATION
+php artisan make:migration create_flights_table
+
+
+MENJALANKAN LARAVEL DENGAN CUSTOM PORT
+./artisan serve --port 8888
+
+
+2. Membuat Route dan Controller untuk Halaman Home
+Sekarang kita akan membuat halaman Home dengan route dan controller.
+
+a. Buat Controller
+Buka terminal dan jalankan perintah untuk membuat controller baru:
+
+=>./artisan make:controller HomeController
+Ini akan membuat file controller di app/Http/Controllers/HomeController.php. Buka file tersebut dan tambahkan method untuk halaman home:
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        return view('home');
+    }
+}
+
+b. Tentukan Route
+Selanjutnya, buka file routes/web.php dan tambahkan route untuk halaman home:
+
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index']);
+
+3. Membuat View untuk Halaman Home
+Buat file view baru di resources/views/home.blade.php untuk halaman Home.
+<!-- resources/views/home.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-blue-500 text-white p-4">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold">Welcome to My Laravel App</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto my-8">
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-800">This is the Home Page</h2>
+            <p class="text-gray-600 mt-4">You can start building your amazing app here.</p>
+            <a href="#" class="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Get Started</a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 My Laravel App. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+4. Menjalankan Aplikasi
+Sekarang Anda dapat menjalankan aplikasi Laravel untuk melihat halaman Home yang telah Anda buat:
+
+=>./artisan serve
+Akses aplikasi Anda di browser dengan membuka http://localhost:8000.
+
+5. Penjelasan Desain
+Tailwind CSS digunakan untuk mendesain halaman dengan kelas utilitas. Misalnya, bg-blue-500 untuk latar belakang biru, text-white untuk teks putih, dan p-4 untuk padding.
+Container digunakan untuk membatasi lebar konten dan memberi jarak horizontal (mx-auto).
+Hover effect diterapkan pada tombol menggunakan kelas hover:bg-blue-600.
+Responsive design akan otomatis bekerja karena Tailwind menggunakan kelas responsif berdasarkan ukuran layar.
+Dengan langkah-langkah di atas, Anda telah berhasil membuat halaman home di Laravel menggunakan Tailwind CSS. Anda bisa menambahkan lebih banyak elemen desain sesuai kebutuhan proyek Anda.
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Di Laravel, untuk membuat view dalam view (atau yang sering disebut sebagai komponen atau partial view), Anda dapat menggunakan fitur Blade (sistem templating di Laravel). Blade memungkinkan Anda untuk menyusun tampilan dengan memisahkan bagian-bagian tertentu menjadi file Blade terpisah yang bisa disertakan di tampilan utama. Ini membuat kode tampilan Anda lebih terorganisir dan lebih mudah untuk dikelola.
+
+Berikut adalah beberapa cara umum untuk membuat dan menyertakan view dalam view di Laravel.
+
+1. Menggunakan @include
+Jika Anda ingin menyertakan file tampilan Blade lainnya di dalam file tampilan utama, Anda dapat menggunakan direktif @include.
+
+Langkah-langkah:
+Buat file view terpisah (misalnya, _header.blade.php).
+
+Contoh file header (resources/views/_header.blade.php):
+
+html
+Copy code
+<!-- resources/views/_header.blade.php -->
+<header class="bg-blue-500 text-white p-4">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold">My Laravel App</h1>
+    </div>
+</header>
+Sertakan file view lain di file utama dengan menggunakan @include:
+
+Contoh file home (resources/views/home.blade.php):
+
+html
+Copy code
+<!-- resources/views/home.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Sertakan header -->
+    @include('_header')
+
+    <main class="container mx-auto my-8">
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-800">This is the Home Page</h2>
+            <p class="text-gray-600 mt-4">You can start building your amazing app here.</p>
+        </div>
+    </main>
+
+</body>
+</html>
+Jalankan aplikasi dan akses halaman untuk melihat hasilnya.
+
+File _header.blade.php akan dimasukkan ke dalam file home.blade.php saat halaman dimuat.
+
+Keuntungan:
+Mudah digunakan untuk menyertakan bagian tampilan yang sering digunakan (seperti header, footer, sidebar).
+Tidak memerlukan logika tambahan atau pengolahan data.
+2. Menggunakan @each
+Jika Anda ingin mengulang bagian tampilan untuk setiap item dalam array atau koleksi, Anda bisa menggunakan @each. Ini berguna jika Anda memiliki data yang perlu di-render di dalam sebuah view yang sama.
+
+Langkah-langkah:
+Buat file view untuk item (misalnya, _product.blade.php).
+
+Contoh file untuk tampilan produk (resources/views/_product.blade.php):
+
+html
+Copy code
+<!-- resources/views/_product.blade.php -->
+<div class="product p-4 border">
+    <h3 class="font-bold">{{ $product['name'] }}</h3>
+    <p>{{ $product['description'] }}</p>
+    <span>${{ $product['price'] }}</span>
+</div>
+Gunakan @each untuk menampilkan data dalam view utama.
+
+Contoh file tampilan utama (resources/views/products.blade.php):
+
+html
+Copy code
+<!-- resources/views/products.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body class="bg-gray-100">
+
+    <main class="container mx-auto my-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Product List</h2>
+
+        <!-- Gunakan @each untuk mengulang data produk -->
+        @each('_product', $products, 'product')
+    </main>
+
+</body>
+</html>
+Controller untuk mengirim data produk:
+
+Misalnya, Anda memiliki controller untuk menampilkan produk:
+
+php
+Copy code
+public function showProducts()
+{
+    $products = [
+        ['name' => 'Product 1', 'description' => 'Description 1', 'price' => 100],
+        ['name' => 'Product 2', 'description' => 'Description 2', 'price' => 200],
+        ['name' => 'Product 3', 'description' => 'Description 3', 'price' => 300],
+    ];
+
+    return view('products', compact('products'));
+}
+Keuntungan:
+Berguna untuk mengulang bagian tampilan yang sama untuk setiap elemen dalam koleksi data.
+Sangat efisien saat menampilkan daftar item atau data yang dinamis.
+3. Menggunakan Component (Jika Anda membutuhkan logika lebih dalam)
+Laravel 7 dan lebih baru memperkenalkan Blade Components yang memungkinkan Anda membuat komponen dengan parameter dan logika khusus.
+
+Langkah-langkah:
+Buat komponen menggunakan Artisan:
+
+bash
+Copy code
+php artisan make:component ProductCard
+Ini akan membuat dua file:
+
+app/View/Components/ProductCard.php (untuk logika komponen).
+resources/views/components/product-card.blade.php (untuk tampilan komponen).
+Tambahkan logika dalam komponen PHP.
+
+Contoh di app/View/Components/ProductCard.php:
+
+php
+Copy code
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+
+class ProductCard extends Component
+{
+    public $name;
+    public $description;
+    public $price;
+
+    public function __construct($name, $description, $price)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
+    }
+
+    public function render()
+    {
+        return view('components.product-card');
+    }
+}
+Buat tampilan komponen (resources/views/components/product-card.blade.php):
+
+html
+Copy code
+<!-- resources/views/components/product-card.blade.php -->
+<div class="product p-4 border">
+    <h3 class="font-bold">{{ $name }}</h3>
+    <p>{{ $description }}</p>
+    <span>${{ $price }}</span>
+</div>
+Gunakan komponen di view utama (resources/views/products.blade.php):
+
+html
+Copy code
+<!-- resources/views/products.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body class="bg-gray-100">
+
+    <main class="container mx-auto my-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Product List</h2>
+
+        <!-- Gunakan komponen ProductCard dengan parameter -->
+        @foreach ($products as $product)
+            <x-product-card :name="$product['name']" :description="$product['description']" :price="$product['price']" />
+        @endforeach
+    </main>
+
+</body>
+</html>
+Keuntungan:
+Komponen dapat menerima parameter dan memiliki logika tersendiri, sehingga lebih fleksibel dan modular.
+Komponen memisahkan kode tampilan dan logika aplikasi dengan lebih baik.
+Kesimpulan
+@include: Digunakan untuk menyertakan view lain tanpa logika tambahan.
+@each: Digunakan untuk mengulang bagian tampilan berdasarkan data.
+Blade Components: Menyediakan cara yang lebih terstruktur dan fleksibel untuk membuat bagian tampilan yang dapat digunakan ulang dengan logika tambahan.
+Semua metode ini memungkinkan Anda untuk membuat view dalam view dengan cara yang efisien dan terorganisir.
+
+
+
+
+
+
+
+
+
+
+
+
+===============================================================================
+===============================================================================
+nama
+PT. ABISHA RUBY PREMIERA
+
+aboutus
+PT. ABISHA RUBY PREMIERA atau ARP merupakan perusahaan yang bergerak di bidang perdagangan & services Peralatan Laboratorium.
+Memulai perjalanan pada Tahun 2020 berkantor pusat di Bekasi, di dirikan oleh tim professional yang berpengalaman dibidang engginer & saintis.
+Dengan tujuan menjadi penyedia peralatan laboratorium yang memberikan solusi kebutuhan alat berkualitas tinggi dan canggih terhadap perubahan teknologi dan pemahaman menyeluruh tentang harapan pelanggan untuk memberikan layanan dan aplikasi berkualitas tinggi untuk menunjang kebutuhan laboratorium modern di Indonesia.
+
+Kami dipercaya menjadi supplier perwakilan di Indonesia oleh beberapa brand besar yang menyediakan berbagai Laboratory Centrifuge, Water Purification System dan General Laboratory Instrument.
+
+Rangkaian produk kami meliputi berbagai alat laboratorium seperti Laboratory Centrifuge, Water Purification System dan banyak lagi general lainnya. Termasuk layanan jasa, seperti jasa instalasi instrument, jasa instalasi pipa gas laboratory, jasa service, Preventive Maintenance & Kalibrasi.
+
+Saat ini kami telah terintegrasi pada semua sektor laboratorium dalam bidang Enviromental, Agriculture, Education, Research and Analysis Laboratory, Food and Pharmacy, Mining, Service Laboratory, dan bidang lainnya.
+
+Kami berkomitmen menjadi kompetitif partner perusahaan dalam memberikan solusi berbagai kebutuhan alat laboratorium modern dan layanan penuh dalam memberikan solusi tepat kebutuhan alat laboratorium modern di Indonesia. juga mendukung penuh dalam pelayanan jasa terhadap produk yang kami tawarkan.
+
+Alamat :
+Office
+Jl. Duta Graha IV – F2 No.4 Rt.005 Rw.011
+Kel. Harapan Baru, Kec Bekasi Utara - Kota Bekasi 17142
+WhatsApp : +62 812-8041-9281
+Phone : 021-88985973
+Email : ar.premiera@gmail.com 
+Website : www.arpremiera.com 
+
+layanan:
+Sales
+Aktivitas penjualan kami diperbarui secara berkala serta melalukan riset pasar. 
+Kami aktif berkomunikasi terkait kebutuhan pelanggan, memasarkan, dan mendistribusikan produk kami dengan melakukan update dari berbagai sektor pemasaran dan kerjasama melalui seminar dan pameran.
+Untuk meningkatkan hubungan bisnis kami dengan pelanggan, kami mendukung pelanggan dalam setiap pertanyaan segala kebutuhan produk dan layanan kami. 
+Service & Maintenance
+Peralatan laboratorium terutama instrumentasi terdiri dari teknologi dengan berbagai komponen dan memerlukan pemeliharaan, baik itu servis berkala pemeliharaan tahunan, kalibrasi, kebutuhan suku cadang habis pakai atau perbaikan yang memerlukan penggantian spare parts. 
+Teknisi kami memiliki banyak pengalaman termasuk kualifikasi pemasangan, pengoperasian dan kalibrasi alat laboratorium. Kami siap membantu dan memastikan bahwa sistem berfungsi dengan baik, layanan service & maintenance kami baik di lokasi pelanggan atau di workshop kami.
+
+visi&misi:
+Visi
+Menjadi mitra yang tanggap memberikan solusi kepada pelanggan dengan terus menerus menginvestasikan ilmu pengetahuan dan teknologi adalah satu kesatuan.
+
+Misi
+1.Menjadi perusahaan acuan dalam bidang layanan teknologi modern peralatan laboratorium
+2.Bertindak secara responsif dalam pelayanan permintaan
+3.Memberikan kualitas produk terbaik, tepat, dan terjangkau.
+===============================================================================
+AnyDesk
+password: =$Anydesk;#1qb4l
+can be accessed via 1 142 548 617
+============
+/opt/lampp/etc/httpd.conf
+============
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+============
+https://auth.hostinger.com/ng/login?_gl=1*23l6gq*_gcl_au*MTM5NDU4NjY2MC4xNzQ1MjAyNTA3*_ga*MTk4ODEyMjQxOS4xNzQ5MjcyNDky*_ga_73N1QWLEMH*czE3NDkyNzI0OTIkbzEkZzEkdDE3NDkyNzM4MTIkajU2JGwwJGgxNDg1MDM5ODA0
+112233qqWW!!
+slowroasterclub@gmail.com
+============
+ssh -p 65002 u204405344@46.202.186.86
+=Ooooo458
+============
+scp -P 65002-r /home/iqbal/dev/comprov2/public/libs/purecounter u204405344@46.202.186.86:/home/u204405344/domains/arpremiera.com/public_html/libs
+============
+============
+============
+
+
+===============================================================================
+ Langkah 1 – Route (di web.php)
+
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'id'])) {
+        session(['app_locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return back();
+})->name('lang.switch');
+
+Langkah 2 – Middleware SetLocale (jika belum ada)
+php artisan make:middleware SetLocale
+
+app/Http/Middleware/SetLocale.php:
+public function handle($request, Closure $next)
+{
+    App::setLocale(session('app_locale', config('app.locale')));
+    return $next($request);
+}
+
+Daftarkan di app/Http/Kernel.php dalam group web:
+
+\App\Http\Middleware\SetLocale::class,
+
+Langkah 3 – Blade Component (Text Toggle)
+Contoh di navbar.blade.php atau layouts/app.blade.php:
+
+@php
+    $locale = app()->getLocale();
+    $otherLocale = $locale === 'en' ? 'id' : 'en';
+@endphp
+
+<a href="{{ route('lang.switch', $otherLocale) }}">
+    {{ strtoupper($otherLocale) }}
+</a>
+💡 Contoh jika en aktif → tampil ID (klik ganti ke ID), jika id aktif → tampil EN.
+
+
+
+
+===============================================================================
+Di Laravel, komponen Blade adalah cara modern dan bersih untuk mengelola bagian UI yang bisa digunakan ulang (seperti tombol, card, navbar, atau language switcher).
+
+✅ 1. Membuat Komponen Blade
+📌 Cara cepat (via Artisan):
+php artisan make:component LangSwitcher
+Ini akan membuat:
+
+app/View/Components/LangSwitcher.php (class logic)
+
+resources/views/components/lang-switcher.blade.php (template)
+
+ 2. Isi Template Komponen
+Edit resources/views/components/lang-switcher.blade.php:
+
+@php
+    $locale = app()->getLocale();
+    $otherLocale = $locale === 'en' ? 'id' : 'en';
+@endphp
+
+<a href="{{ route('lang.switch', $otherLocale) }}">
+    {{ strtoupper($otherLocale) }}
+</a>
+✅ 3. (Opsional) Tambah Logic di Class
+Edit app/View/Components/LangSwitcher.php jika ingin logic tambahan:
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+
+class LangSwitcher extends Component
+{
+    public function render()
+    {
+        return view('components.lang-switcher');
+    }
+}
+Biasanya tidak perlu diubah kalau hanya tampilkan view.
+
+4. Menggunakan Komponen di Blade
+Setelah komponen dibuat, panggil langsung di Blade:
+
+<x-lang-switcher />
+Laravel otomatis cari di:
+
+resources/views/components/lang-switcher.blade.php
+
+
+5. Mengirim Data ke Komponen (Opsional)
+Misalnya komponen butuh variabel:
+
+public function __construct(public string $label) {}
+Lalu di Blade:
+
+<x-lang-switcher label="Pilih Bahasa" />
+Dan di template:
+
+<span>{{ $label }}</span>
+
+===============================================================================
+=$Main;#1qb4l
+=$Terabox;#1qb4l
+=$Onlyoffice;#1qb4l
+=$Nextcloud;#1qb4l
+=$Niagahoster;#1qb4l
+=Xxxxxxx1
+Ooooo458 phpmyadmin arp
+
+
+
+===============================================================================
+resources/views/home/products2.blade.php
+resources/views/home/products.blade.php
+app/Http/Controllers/HomeController.php
+resources/views/components/lang-switcher.blade.php
+===============================================================================
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
+// Generate URL di Blade atau Controller
+$url = route('user.show', ['id' => 10]); // Output: /user/10
+===============================================================================
+@isset($brand)
+    @if(!empty($brand))
+        <p>{{ $brand->name }}</p>
+    @endif
+@endisset
+===============================================================================
+docker pull mysql:latest
+docker run --name server_name -e MYSQL_ROOT_PASSWORD password -p 3333:3306 -d mysql:latest
+docker exec -it containerID sh
+===============================================================================
+
+
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+https://auth.hostinger.com/ng/login?_gl=1*23l6gq*_gcl_au*MTM5NDU4NjY2MC4xNzQ1MjAyNTA3*_ga*MTk4ODEyMjQxOS4xNzQ5MjcyNDky*_ga_73N1QWLEMH*czE3NDkyNzI0OTIkbzEkZzEkdDE3NDkyNzM4MTIkajU2JGwwJGgxNDg1MDM5ODA0
+112233qqWW!!
+slowroasterclub@gmail.com pass: 112233qqWW!!
+============
+ssh -p 65002 u204405344@46.202.186.86
+=Ooooo458
+============
+scp -P 65002-r /home/iqbal/dev/comprov2/public/libs/purecounter u204405344@46.202.186.86:/home/u204405344/domains/arpremiera.com/public_html/libs
+====================================================
+https://e.account.hostinger.com/c2/1961:d1422031e3c0c57038a8ff6d829da5d5:d250616:65dcb96ee0fe747bc60cbf00:1750039144729/d21fff1f?jwtH=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&jwtP=eyJpYXQiOjE3NTAwMzkxNDQsImNkIjoiLmVtYWlsLmhvc3Rpbmdlci5jb20iLCJjZSI6ODY0MDAsInRrIjoiaG9zdGluZ2VyIiwibXRsSUQiOiI2ODRmNWEwM2FkOGRjYTZjY2QwNWNkMGUiLCJsaW5rVXJsIjoiaHR0cHM6XC9cL2F1dGguaG9zdGluZ2VyLmNvbVwvYXBpXC9leHRlcm5hbFwvdjFcL2FjY2Vzc1wvMTM2OTY1N1wvYWNjZXB0P2V4cGlyZXM9MTc1MDY0MzkzOSZzaWduYXR1cmU9Yzc5YmE1ODlhZGVjNzhjYzA4MzJjMmU3NGYwNGE3OGE4Njk5ZmRkZDg1NjVmOWZiYTA2OTNiZTEyODQ2MmE3MCZ1dG1fc291cmNlPWNvcmRpYWwmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY2FtcGFpZ249bmhfcHJvX2NsaWVudF9zaGFyZV9hY2Nlc3MifQ&jwtS=TE-Y2a8OwYobUQk_WKLON892EejAIPGrIWpy5GBgycI
+
+https://hpanel.hostinger.com/?&_ga=GA1.1.1456502700.1750059446
+niaga hoster
+iqbalatmadja@gmail.com
+=Ooooo458
+Hostname server MySQL kami adalah: srv1865.hstgr.io atau Anda bisa menggunakan IP ini sebagai hostname: 153.92.15.54
+db:u204405344_u204405344_
+user:u204405344_u204405344_	
+
+phpmyadmin:
+https://hpanel.hostinger.com/websites/arpremiera.com/redirect?l=phpMyAdmin&db_name=u204405344_u204405344_
+http://auth-db1865.hstgr.io/
+
+.env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=u204405344_u204405344_
+DB_USERNAME=u204405344_u204405344_
+DB_PASSWORD=Ooooo458
+
