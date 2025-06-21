@@ -355,14 +355,7 @@ can be accessed via 1 142 548 617
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 ============
-https://auth.hostinger.com/ng/login?_gl=1*23l6gq*_gcl_au*MTM5NDU4NjY2MC4xNzQ1MjAyNTA3*_ga*MTk4ODEyMjQxOS4xNzQ5MjcyNDky*_ga_73N1QWLEMH*czE3NDkyNzI0OTIkbzEkZzEkdDE3NDkyNzM4MTIkajU2JGwwJGgxNDg1MDM5ODA0
-112233qqWW!!
-slowroasterclub@gmail.com
-============
-ssh -p 65002 u204405344@46.202.186.86
-=Ooooo458
-============
-scp -P 65002-r /home/iqbal/dev/comprov2/public/libs/purecounter u204405344@46.202.186.86:/home/u204405344/domains/arpremiera.com/public_html/libs
+
 ============
 ============
 ============
