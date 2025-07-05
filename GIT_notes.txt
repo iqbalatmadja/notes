@@ -13,4 +13,32 @@ git remote add origin https://github.com/iqbalatmadja/webapp1.git
 git branch -M main
 git push -u origin main
 ================================================================
+Untuk menggunakan GitHub dengan SSH key alih-alih Personal Access Token (PAT), ikuti langkah-langkah berikut:
+1. Buat SSH Key (Jika Belum Ada)
+  Buka terminal (Linux/macOS) atau Git Bash/PowerShell (Windows).
+  Jalankan perintah berikut untuk membuat SSH key baru:
+  >ssh-keygen -t ed25519 -C "akunemailygdigunakandigithub@mail.com"
+  Tekan Enter untuk menyimpan key di lokasi default (~/.ssh/id_ed25519).
+  Masukkan passphrase (opsional, tapi disarankan untuk keamanan).
+2. Tambahkan SSH Key ke ssh-agent
+  Jalankan ssh-agent di background:
+  >eval "$(ssh-agent -s)"
+  Tambahkan SSH key privat ke ssh-agent:
+  >ssh-add ~/.ssh/id_ed25519
+3. Tambahkan SSH Key Publik ke GitHub
+  Salin isi SSH key publik:
+  >cat ~/.ssh/id_ed25519.pub
+  Buka GitHub Settings → SSH and GPG keys.
+  Klik New SSH Key, beri judul (misalnya: "Laptop Kantor"), lalu tempelkan key publik.
+4. Ubah Remote Repo dari HTTPS ke SSH
+  Jika repo sudah ada dengan remote HTTPS, ubah URL remote-nya:
+  >git remote set-url origin git@github.com:username/repo.git
+  Jika clone repo baru, gunakan URL SSH:
+  git clone git@github.com:username/repo.git
+5. Verifikasi Koneksi SSH
+  Jalankan:
+  >ssh -T git@github.com
+  Jika berhasil, pesan berikut akan muncul:
+  Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+
 ================================================================================================================================================================================================================================================================================================================================================================================================================================================================
