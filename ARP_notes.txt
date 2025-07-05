@@ -6,6 +6,10 @@ ssh -p 65002 u204405344@46.202.186.86
 =Ooooo458
 ============
 scp -P 65002-r /home/iqbal/dev/comprov2/public/libs/purecounter u204405344@46.202.186.86:/home/u204405344/domains/arpremiera.com/public_html/libs
+
+scp -P 65002 -r /home/iqbal/dev/comprov2/resources/views/home/index.blade.php   u204405344@46.202.186.86:/home/u204405344/domains/arpremiera.com/comprov2/resources/views/home
+
+
 ====================================================
 https://e.account.hostinger.com/c2/1961:d1422031e3c0c57038a8ff6d829da5d5:d250616:65dcb96ee0fe747bc60cbf00:1750039144729/d21fff1f?jwtH=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&jwtP=eyJpYXQiOjE3NTAwMzkxNDQsImNkIjoiLmVtYWlsLmhvc3Rpbmdlci5jb20iLCJjZSI6ODY0MDAsInRrIjoiaG9zdGluZ2VyIiwibXRsSUQiOiI2ODRmNWEwM2FkOGRjYTZjY2QwNWNkMGUiLCJsaW5rVXJsIjoiaHR0cHM6XC9cL2F1dGguaG9zdGluZ2VyLmNvbVwvYXBpXC9leHRlcm5hbFwvdjFcL2FjY2Vzc1wvMTM2OTY1N1wvYWNjZXB0P2V4cGlyZXM9MTc1MDY0MzkzOSZzaWduYXR1cmU9Yzc5YmE1ODlhZGVjNzhjYzA4MzJjMmU3NGYwNGE3OGE4Njk5ZmRkZDg1NjVmOWZiYTA2OTNiZTEyODQ2MmE3MCZ1dG1fc291cmNlPWNvcmRpYWwmdXRtX21lZGl1bT1lbWFpbCZ1dG1fY2FtcGFpZ249bmhfcHJvX2NsaWVudF9zaGFyZV9hY2Nlc3MifQ&jwtS=TE-Y2a8OwYobUQk_WKLON892EejAIPGrIWpy5GBgycI
 
@@ -29,3 +33,5 @@ DB_DATABASE=u204405344_u204405344_
 DB_USERNAME=u204405344_u204405344_
 DB_PASSWORD=Ooooo458
 
+====================================================
+edited:
